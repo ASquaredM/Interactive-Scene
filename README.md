@@ -57,7 +57,3 @@ c - C: Right Hip (Lateral)
 v - V: Left Hip (Lateral)  
 b - B: Right Knee  
 n - N: Left Knee  
-
-## Challenges
-
-The main challenges this time was working with the new camera functions and adjusting the step by which each camera movement changes.  
