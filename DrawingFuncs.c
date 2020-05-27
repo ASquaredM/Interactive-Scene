@@ -22,7 +22,7 @@ void Sphere(GLfloat r, GLfloat tx, GLfloat ty, GLfloat tz)
     glPushMatrix();
 
     glTranslatef(tx, ty, tz);
-    glutSolidSphere(r, 13, 13);
+    glutSolidSphere(r, 51, 51);
 
     glPopMatrix();
 }

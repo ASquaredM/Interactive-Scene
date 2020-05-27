@@ -1,6 +1,13 @@
 #include <GL/glut.h>
 #include <math.h>
 
+// White light source
+float light_ambient[] = {1.0, 1.0, 1.0, 1.0};
+float light_diffuse[] = {1.0, 1.0, 1.0, 1.0};
+float light_specular[] = {1.0, 1.0, 1.0, 1.0};
+// Light position
+float light_position[] = {0.0, 11.0, 4.0, 1.0};
+
 static int R_Shoulder = 0, L_Shoulder = 0, R_Shoulder_Lat = 0, L_Shoulder__Lat = 0, R_Elbow = 0, L_Elbow = 0, FingerBase = 10, FingerTip = -20, R_Hip = 0,
 		   L_Hip = 0, R_Hip_Lat = 0, L_Hip_Lat = 0,
 		   R_Knee = 0, L_Knee = 0;
@@ -44,7 +51,7 @@ int main(int argc, char **argv)
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(1000, 1000);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Robot");
+	glutCreateWindow("Interactive Scene");
 	init();
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
@@ -66,9 +73,18 @@ void init(void)
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glShadeModel(GL_FLAT);
 	glMatrixMode(GL_MODELVIEW);
+
+	// Setting light source properties and enabling it
+	glLightfv(GL_LIGHT1, GL_POSITION, light_position);
+	glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
+	glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHTING);
+
 	glLoadIdentity();
 	gluLookAt(eye[0], eye[1], eye[2], center[0], center[1], center[2], up[0], up[1], up[2]);
 
