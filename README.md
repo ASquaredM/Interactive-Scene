@@ -9,7 +9,7 @@ The code uses a header file that contains the functions used for drawing.
 So, the following command can be used to run the code
 
 ``` terminal
-gcc -o Exec Assignment3.c DrawingFuncs.c -lGL -lGLU -lglut -lm
+gcc -o Exec main.cpp DrawingFuncs.cpp MathHelpers.cpp MainIO.cpp -lGL -lGLU -lglut -lm
 ```
 
 Or alternatively, the provided `Exec` file can be run like so.
