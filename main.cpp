@@ -168,6 +168,7 @@ void display(void)
 	glRotatef(angle2, 1.0, 0.0, 0.0);
 	glRotatef(angle, 0.0, 1.0, 0.0);
 
+	// glTranslatef(tx, 0, tz);
 	CreateFullBody();
 
 	glPopMatrix();
