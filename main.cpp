@@ -52,13 +52,13 @@ void initRendering()
 	// assign light parameters
 	// Light 0
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse0);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor1);
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition0);
 	// Light 1
 	glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse1);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, lightColor1);
 	glLightfv(GL_LIGHT1, GL_POSITION, lightPosition1);
@@ -173,7 +173,9 @@ void display(void)
 	glPopMatrix();
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 
-	//Sphere(0.1, 0, -8.1, 0);
+	// To Represent Light Sources and measure distances (I am too lazy to figure those on my own)
+	Sphere(0.1, 0.0, 15.1, 0);
+	Sphere(0.1, 0.0, 1.1, -21);
 
 	glutSwapBuffers();
 }

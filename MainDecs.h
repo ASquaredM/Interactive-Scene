@@ -1,6 +1,9 @@
 #ifndef MAINDECS_H_
 #define MAINDECS_H_
 
+#include <math.h>
+#include "MathHelpers.h"
+
 int windowWidth = 1024;
 int windowHeight = 768;
 GLfloat aspect = GLfloat(windowWidth) / GLfloat(windowHeight);
@@ -34,16 +37,17 @@ GLfloat cube_specular[] = {0.5, 0.5, 0.5, 1.0};
 GLfloat cube_shininess[] = {10.0};
 
 // White light source
-GLfloat light_ambient[] = {0.0, 0.0, 0.0, 0.0};
-GLfloat light_diffuse[] = {0.5, 0.5, 0.5, 1.0};
+GLfloat light_ambient[] = {0.3, 0.3, 0.3, 0.5};
+GLfloat light_diffuse0[] = {0, -1, 0, 1.0};
+GLfloat light_diffuse1[] = {0, 0.401, 0.916, 1.0};
 GLfloat light_specular[] = {1.0, 1.0, 1.0, 1.0};
 
 // Light Position
-GLfloat lightPosition0[] = {0.5, 5.0, 0.0, 1.0};
-GLfloat lightPosition1[] = {-0.5, -5.0, -2.0, 1.0};
+GLfloat lightPosition0[] = {0.0, 15.1, 0.0, 1.0};
+GLfloat lightPosition1[] = {0.0, 1.1, -21.0, 1.0};
 
 // Light Color
-GLfloat lightColor1[] = {1.0f, 1.0f, 1.0f, 1.0f};
+GLfloat lightColor1[] = {0.8314f, 0.9216f, 1.0f, 1.0f};
 
 int R_Shoulder = 0, L_Shoulder = 0, R_Shoulder_Lat = 0, L_Shoulder__Lat = 0, R_Elbow = 0, L_Elbow = 0, FingerBase = 10, FingerTip = -20, R_Hip = 0,
     L_Hip = 0, R_Hip_Lat = 0, L_Hip_Lat = 0,
