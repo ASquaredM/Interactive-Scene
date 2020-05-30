@@ -9,7 +9,7 @@ The code uses a header file that contains the functions used for drawing.
 So, the following command can be used to run the code
 
 ``` terminal
-gcc -o Exec main.cpp DrawingFuncs.cpp MathHelpers.cpp MainIO.cpp -lGL -lGLU -lglut -lm
+g++ -o Exec main.cpp imageloader.cpp glm.cpp DrawingFuncs.cpp MathHelpers.cpp MainIO.cpp CameraFns.cpp -lGL -lGLU -lglut -lm
 ```
 
 Or alternatively, the provided `Exec` file can be run like so.
@@ -40,20 +40,20 @@ Or alternatively, the provided `Exec` file can be run like so.
 ### Camera Controls
 
 Arrows: Control the camera in their respective direction.  
-j - m: Navigate the body Forward/Backward respectively.  
+`'k'` - `','`: Navigate the body Forward/Backward respectively.  
 __The mouse can also be used to rotate the body.__  
 
 ### Body Control
 
-a - A: Right Shoulder (Lateral)  
-s - S: Left Shoulder (Lateral)  
-t - T: Right Shoulder  
-y - Y: Left Shoulder  
-f - F: Grip  
-g - G: Finger Tips  
-z - Z: Right Hip  
-x - X: Left Hip  
-c - C: Right Hip (Lateral)  
-v - V: Left Hip (Lateral)  
-b - B: Right Knee  
-n - N: Left Knee  
+`a` - `A`: Right Shoulder (Lateral)  
+`s` - `S`: Left Shoulder (Lateral)  
+`t` - `T`: Right Shoulder  
+`y` - `Y`: Left Shoulder  
+`f` - `F`: Grip  
+`g` - `G`: Finger Tips  
+`z` - `Z`: Right Hip  
+`x` - `X`: Left Hip  
+`c` - `C`: Right Hip (Lateral)  
+`v` - `V`: Left Hip (Lateral)  
+`b` - `B`: Right Knee  
+`n` - `N`: Left Knee  

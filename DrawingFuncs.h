@@ -14,4 +14,7 @@ void Arm(GLfloat Shoulder, GLfloat Shoulder_Lat, GLfloat Elbow, GLfloat FingerBa
 void Leg(GLfloat Hip, GLfloat Hip_Lat, GLfloat Knee, GLfloat tx, GLfloat ty,
          GLfloat tz, GLfloat orintation);
 
+//Function used for Drawing
+void CreateFullBody();
+
 #endif

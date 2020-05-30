@@ -4,24 +4,20 @@
 #include "Decs.h"
 #include "DrawingFuncs.h"
 #include "imageloader.h"
-#include "MathHelpers.h"
+#include "CameraFns.h"
 #include "MainIO.h"
 #include "MainDecs.h"
 
 int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(1000, 1000);
-	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Interactive Scene");
-
 	init();
+
 	glutReshapeFunc(reshape);
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
 	glutSpecialFunc(specialKeys);
-	glutMouseFunc(mouse);
+	//glutMouseFunc(mouse);
 	glutMotionFunc(motion);
 
 	glutMainLoop();
@@ -30,30 +26,143 @@ int main(int argc, char **argv)
 
 void init(void)
 {
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
+	glutInitWindowSize(windowWidth, windowHeight);
+	glutInitWindowPosition(100, 100);
+	glutCreateWindow("Interactive Scene");
+	initRendering();
+
 	glMatrixMode(GL_PROJECTION);
-	gluPerspective(65.0, (GLfloat)1024 / (GLfloat)869, 1.0, 60.0);
+	gluPerspective(65.0, aspect, 1.0, 60.0);
+}
+
+//Initializes 3D rendering
+void initRendering()
+{
+	Image *image = loadBMP("floor.bmp");
+	_textureId = loadTexture(image);
+	delete image;
+
+	// Setting light source properties and enabling it
+	// Turn on the power
+	glEnable(GL_LIGHTING);
+	// Flip light switch
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
+	// assign light parameters
+	// Light 0
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor1);
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition0);
+	// Light 1
+	glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, lightColor1);
+	glLightfv(GL_LIGHT1, GL_POSITION, lightPosition1);
+
+	// Material Properties
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, mat_amb_diff);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
+
+	glEnable(GL_NORMALIZE);
+	//Enable smooth shading
+	glShadeModel(GL_SMOOTH);
+	// Enable Depth buffer
+	glEnable(GL_DEPTH_TEST);
+
+	// startList = glGenLists(4);
+	// glNewList(startList, GL_COMPILE);
+	// glRotatef(90, 0, 1, 0);
+	// 	glScalef(1, 1.2, 1);
+	// 	glTranslatef(1.7, -0.05, -.3);
+	// pmodel1 = pmodel4;
+	// drawmodel();
+	// glEndList();
+
+	// glNewList(startList + 1, GL_COMPILE);
+	// 	glRotatef(270, 0, 1, 0);
+	// 	glScalef(1, 1.2, 1);
+	// 	glTranslatef(-1.7, -0.05, -.3);
+	// pmodel1 = pmodel4;
+	// drawmodel();
+	// glEndList();
+
+	// glNewList(startList + 2, GL_COMPILE);
+	// glTranslatef(0.3, -.1, 0.075);
+	// pmodel1 = pmodel2;
+	// drawmodel();
+	// glEndList();
+
+	// glNewList(startList + 3, GL_COMPILE);
+	// glTranslatef(-0.6, 0, 0.0);
+	// pmodel1 = pmodel2;
+	// drawmodel();
+	// glEndList();
 }
 
 void display(void)
 {
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_TEXTURE_2D);
+	// Clear Depth and Color buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0, 0.0, 0.0, 1.0);
-	glShadeModel(GL_FLAT);
+
 	glMatrixMode(GL_MODELVIEW);
 
-	// Setting light source properties and enabling it
-	glLightfv(GL_LIGHT1, GL_POSITION, light_position);
-	glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
-	glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
-	glEnable(GL_LIGHT1);
-	glEnable(GL_LIGHTING);
-
 	glLoadIdentity();
+
 	gluLookAt(eye[0], eye[1], eye[2], center[0], center[1], center[2], up[0], up[1], up[2]);
 
+	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
+	glPushMatrix();
+
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition0);
+	glLightfv(GL_LIGHT1, GL_POSITION, lightPosition1);
+
+	glPopMatrix();
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+
+	// materials properties
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, mat_amb_diff);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
+
+	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
+	//floor
+	glPushMatrix();
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, _textureId);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	glBegin(GL_QUADS);
+
+	glNormal3f(0.0, -1.0, 0.0);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-21, -8.1, 21);
+
+	glTexCoord2f(5.0f, 0.0f);
+	glVertex3f(21, -8.1, 21);
+
+	glTexCoord2f(5.0f, 20.0f);
+	glVertex3f(21, -8.1, -21);
+
+	glTexCoord2f(0.0f, 20.0f);
+	glVertex3f(-21, -8.1, -21);
+
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+	glPopMatrix();
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+
+	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
 	glPushMatrix();
 
 	glRotatef(angle2, 1.0, 0.0, 0.0);
@@ -62,6 +171,9 @@ void display(void)
 	CreateFullBody();
 
 	glPopMatrix();
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+
+	//Sphere(0.1, 0, -8.1, 0);
 
 	glutSwapBuffers();
 }
@@ -77,88 +189,32 @@ void reshape(int w, int h)
 	glTranslatef(0.0, 0.0, -5.0);
 }
 
-///////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
+//////////////////
 
-void motion(int x, int y)
+//Makes the image into a texture, and returns the id of the texture
+GLuint loadTexture(Image *image)
 {
-	if (moving)
-	{
-		angle = angle + (x - startx);
-		angle2 = angle2 + (y - starty);
-		startx = x;
-		starty = y;
-		glutPostRedisplay();
-	}
+	GLuint textureId;
+	glGenTextures(1, &textureId);			 //Make room for our texture
+	glBindTexture(GL_TEXTURE_2D, textureId); //Tell OpenGL which texture to edit
+	//Map the image to the texture
+	glTexImage2D(GL_TEXTURE_2D,				  //Always GL_TEXTURE_2D
+				 0,							  //0 for now
+				 GL_RGB,					  //Format OpenGL uses for image
+				 image->width, image->height, //Width and height
+				 0,							  //The border of the image
+				 GL_RGB,					  //GL_RGB, because pixels are stored in RGB format
+				 GL_UNSIGNED_BYTE,			  //GL_UNSIGNED_BYTE, because pixels are stored
+											  //as unsigned numbers
+				 image->pixels);			  //The actual pixel data
+	return textureId;						  //Returns the id of the texture
 }
 
-void Right()
+void drawmodel(void)
 {
-	// implement camera rotation arround vertical window screen axis to the right
-	// used by mouse and right arrow
-	rotatePoint(up, 0.5, eye);
-}
-
-void Left()
-{
-	// used by mouse and left arrow
-	rotatePoint(up, -0.5, eye);
-}
-
-void Up()
-{
-	// implement camera rotation arround horizontal window screen axis +ve
-	// used by up arrow
-	crossProduct(eye, up, Cross_Product_Vect);
-	normalize(Cross_Product_Vect);
-	rotatePoint(Cross_Product_Vect, 0.5, eye);
-	rotatePoint(Cross_Product_Vect, 0.5, up);
-}
-
-void Down()
-{
-	// implement camera rotation arround horizontal window screen axis
-	// used by down arrow
-	crossProduct(eye, up, Cross_Product_Vect);
-	normalize(Cross_Product_Vect);
-	rotatePoint(Cross_Product_Vect, -0.5, eye);
-	rotatePoint(Cross_Product_Vect, -0.5, up);
-}
-
-void moveForward()
-{
-	double direction[3] = {0, 0, 0};
-	direction[0] = center[0] - eye[0];
-	direction[1] = center[1] - eye[1];
-	direction[2] = center[2] - eye[2];
-
-	eye[0] += direction[0] * 0.1;
-	eye[1] += direction[1] * 0.1;
-	eye[2] += direction[2] * 0.1;
-}
-
-void moveBack()
-{
-	double direction[3] = {0, 0, 0};
-	direction[0] = center[0] - eye[0];
-	direction[1] = center[1] - eye[1];
-	direction[2] = center[2] - eye[2];
-
-	eye[0] -= direction[0] * 0.1;
-	eye[1] -= direction[1] * 0.1;
-	eye[2] -= direction[2] * 0.1;
-}
-
-void CreateFullBody()
-{
-	Sphere(0.5, 0, 2, 0);
-
-	Cube(2, 3, 1);
-
-	Arm(R_Shoulder, R_Shoulder_Lat, R_Elbow, FingerBase, FingerTip, -1.35, 1.3, 0, -1);
-	Arm(L_Shoulder, L_Shoulder__Lat, L_Elbow, FingerBase, FingerTip, 1.35, 1.3, 0, 1);
-
-	Leg(R_Hip, R_Hip_Lat, R_Knee, -0.5, -1.7, 0, -1);
-	Leg(L_Hip, L_Hip_Lat, L_Knee, 0.5, -1.7, 0, 1);
+	glmUnitize(pmodel1);
+	glmFacetNormals(pmodel1);
+	glmVertexNormals(pmodel1, 90.0);
+	glmScale(pmodel1, .15);
+	glmDraw(pmodel1, GLM_SMOOTH | GLM_MATERIAL);
 }

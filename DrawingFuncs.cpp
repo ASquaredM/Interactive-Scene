@@ -1,5 +1,6 @@
 #include <GL/glut.h>
 #include "DrawingFuncs.h"
+#include "Decs.h"
 
 void Rot(GLfloat ang, GLfloat tx, GLfloat ty, GLfloat tz, GLfloat tbx,
          GLfloat tby, GLfloat tbz, GLfloat fx, GLfloat fy, GLfloat fz)
@@ -145,4 +146,17 @@ void Leg(GLfloat Hip, GLfloat Hip_Lat, GLfloat Knee, GLfloat tx, GLfloat ty,
     Cube(0.5, 0.21, 1);
 
     glPopMatrix();
+}
+
+void CreateFullBody()
+{
+    Sphere(0.5, 0, 2, 0);
+
+    Cube(2, 3, 1);
+
+    Arm(R_Shoulder, R_Shoulder_Lat, R_Elbow, FingerBase, FingerTip, -1.35, 1.3, 0, -1);
+    Arm(L_Shoulder, L_Shoulder__Lat, L_Elbow, FingerBase, FingerTip, 1.35, 1.3, 0, 1);
+
+    Leg(R_Hip, R_Hip_Lat, R_Knee, -0.5, -1.7, 0, -1);
+    Leg(L_Hip, L_Hip_Lat, L_Knee, 0.5, -1.7, 0, 1);
 }

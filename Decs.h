@@ -20,17 +20,5 @@ extern double Cross_Product_Vect[];
 void init(void);
 void display(void);
 void reshape(int w, int h);
-static void motion(int x, int y);
-
-//Functions for the Camera movement
-void Right();
-void Left();
-void Up();
-void Down();
-void moveForward();
-void moveBack();
-
-//Function used for Drawing
-void CreateFullBody();
 
 #endif

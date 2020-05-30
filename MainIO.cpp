@@ -1,5 +1,6 @@
 #include <GL/glut.h>
 #include "Decs.h"
+#include "CameraFns.h"
 
 void specialKeys(int key, int x, int y)
 {
@@ -12,10 +13,10 @@ void specialKeys(int key, int x, int y)
         Right();
         break;
     case GLUT_KEY_UP:
-        Up();
+        moveForward();
         break;
     case GLUT_KEY_DOWN:
-        Down();
+        moveBack();
         break;
     }
 
@@ -27,13 +28,13 @@ void keyboard(unsigned char key, int x, int y)
     // List all youe keyboard keys from assignment two her for body movement
     switch (key)
     {
-    case 'j':
-        moveForward();
+    case 'k':
+        moveUp();
         glutPostRedisplay();
         break;
 
-    case 'm':
-        moveBack();
+    case ',':
+        moveDown();
         glutPostRedisplay();
         break;
 
