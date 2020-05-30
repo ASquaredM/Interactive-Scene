@@ -17,8 +17,4 @@ extern double center[];
 extern double up[];
 extern double Cross_Product_Vect[];
 
-void init(void);
-void display(void);
-void reshape(int w, int h);
-
 #endif

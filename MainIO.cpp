@@ -7,10 +7,10 @@ void specialKeys(int key, int x, int y)
     switch (key)
     {
     case GLUT_KEY_LEFT:
-        Left();
+        moveLeft();
         break;
     case GLUT_KEY_RIGHT:
-        Right();
+        moveRight();
         break;
     case GLUT_KEY_UP:
         moveForward();
@@ -28,13 +28,23 @@ void keyboard(unsigned char key, int x, int y)
     // List all youe keyboard keys from assignment two her for body movement
     switch (key)
     {
-    case 'k':
+    case 'p':
         moveUp();
         glutPostRedisplay();
         break;
 
-    case ',':
+    case ';':
         moveDown();
+        glutPostRedisplay();
+        break;
+
+    case '\'':
+        Right();
+        glutPostRedisplay();
+        break;
+
+    case 'l':
+        Left();
         glutPostRedisplay();
         break;
 

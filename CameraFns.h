@@ -12,5 +12,7 @@ void moveForward();
 void moveBack();
 void moveUp();
 void moveDown();
+void moveRight();
+void moveLeft();
 
 #endif

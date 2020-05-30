@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
 	glutSpecialFunc(specialKeys);
-	//glutMouseFunc(mouse);
+	glutMouseFunc(mouse);
 	glutMotionFunc(motion);
 
 	glutMainLoop();
@@ -39,8 +39,8 @@ void init(void)
 //Initializes 3D rendering
 void initRendering()
 {
-	Image *image = loadBMP("floor.bmp");
-	_textureId = loadTexture(image);
+	Image *image = loadBMP("floor2.bmp");
+	_textureId = loadTexture(image, _textureId);
 	delete image;
 
 	// Setting light source properties and enabling it
@@ -116,6 +116,11 @@ void display(void)
 
 	gluLookAt(eye[0], eye[1], eye[2], center[0], center[1], center[2], up[0], up[1], up[2]);
 
+	glTranslatef(0.0f, 0.0f, -11.0f);
+
+	glRotatef(angle2, 1.0, 0.0, 0.0);
+	glRotatef(angle, 0.0, 1.0, 0.0);
+
 	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
 	glPushMatrix();
 
@@ -133,40 +138,14 @@ void display(void)
 	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
 	//floor
 	glPushMatrix();
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, _textureId);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	DrawWall(21.0f, -8.1f, 21.0f, _textureId);
 
-	glBegin(GL_QUADS);
-
-	glNormal3f(0.0, -1.0, 0.0);
-
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(-21, -8.1, 21);
-
-	glTexCoord2f(5.0f, 0.0f);
-	glVertex3f(21, -8.1, 21);
-
-	glTexCoord2f(5.0f, 20.0f);
-	glVertex3f(21, -8.1, -21);
-
-	glTexCoord2f(0.0f, 20.0f);
-	glVertex3f(-21, -8.1, -21);
-
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 
 	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
 	glPushMatrix();
-
-	glRotatef(angle2, 1.0, 0.0, 0.0);
-	glRotatef(angle, 0.0, 1.0, 0.0);
 
 	// glTranslatef(tx, 0, tz);
 	CreateFullBody();
@@ -174,8 +153,24 @@ void display(void)
 	glPopMatrix();
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 
+	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
+	glPushMatrix();
+	glTranslatef(5.0f, 3.7f, 0.0f);
+	glScalef(3.0f, 3.0f, 3.0f);
+	drawmodel1();
+	glPopMatrix();
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+
+	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
+	glPushMatrix();
+	glTranslatef(-11.0f, -5.1f, 0.0f);
+	glScalef(3.0f, 3.0f, 3.0f);
+	drawmodel2();
+	glPopMatrix();
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+
 	// To Represent Light Sources and measure distances (I am too lazy to figure those on my own)
-	Sphere(0.1, 0.0, 15.1, 0);
+	Sphere(0.1, 0.0, 7.1, 0);
 	Sphere(0.1, 0.0, 1.1, -21);
 
 	glutSwapBuffers();
@@ -195,11 +190,15 @@ void reshape(int w, int h)
 //////////////////
 
 //Makes the image into a texture, and returns the id of the texture
-GLuint loadTexture(Image *image)
+GLuint loadTexture(Image *image, GLuint tex)
 {
-	GLuint textureId;
-	glGenTextures(1, &textureId);			 //Make room for our texture
-	glBindTexture(GL_TEXTURE_2D, textureId); //Tell OpenGL which texture to edit
+	glGenTextures(1, &tex);			   //Make room for our texture
+	glBindTexture(GL_TEXTURE_2D, tex); //Tell OpenGL which texture to edit
+	// set the texture wrapping/filtering options (on the currently bound texture object)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	//Map the image to the texture
 	glTexImage2D(GL_TEXTURE_2D,				  //Always GL_TEXTURE_2D
 				 0,							  //0 for now
@@ -210,7 +209,7 @@ GLuint loadTexture(Image *image)
 				 GL_UNSIGNED_BYTE,			  //GL_UNSIGNED_BYTE, because pixels are stored
 											  //as unsigned numbers
 				 image->pixels);			  //The actual pixel data
-	return textureId;						  //Returns the id of the texture
+	return tex;								  //Returns the id of the texture
 }
 
 void drawmodel(void)
@@ -220,4 +219,37 @@ void drawmodel(void)
 	glmVertexNormals(pmodel1, 90.0);
 	glmScale(pmodel1, .15);
 	glmDraw(pmodel1, GLM_SMOOTH | GLM_MATERIAL);
+}
+
+void drawmodel1(void)
+{
+	if (!pmodel)
+	{
+		char Obj_path[] = "res/asd/f-16.obj";
+		pmodel = glmReadOBJ(Obj_path);
+
+		if (!pmodel)
+			exit(0);
+		glmUnitize(pmodel);
+		glmFacetNormals(pmodel);
+		glmVertexNormals(pmodel, 90.0);
+		glmScale(pmodel, 1);
+	}
+	glmDraw(pmodel, GLM_SMOOTH | GLM_MATERIAL);
+}
+void drawmodel2(void)
+{
+	if (!pmodel2)
+	{
+		char Obj_path[] = "res/Fire Hydrant/uploads_files_2072733_Fire+Hydrant/hydrant_low.obj";
+		pmodel2 = glmReadOBJ(Obj_path);
+
+		if (!pmodel2)
+			exit(0);
+		glmUnitize(pmodel2);
+		glmFacetNormals(pmodel2);
+		glmVertexNormals(pmodel2, 90.0);
+		glmScale(pmodel2, 1);
+	}
+	glmDraw(pmodel2, GLM_SMOOTH | GLM_MATERIAL);
 }

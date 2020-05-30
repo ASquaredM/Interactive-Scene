@@ -81,3 +81,18 @@ void moveDown()
     eye[1] -= 0.7;
     center[1] -= 0.7;
 }
+
+void moveRight()
+{
+    // implement camera rotation arround vertical window screen axis to the right
+    // used by mouse and right arrow
+    eye[0] -= 0.7;
+    center[0] -= 0.7;
+}
+
+void moveLeft()
+{
+    // used by mouse and left arrow
+    eye[0] += 0.7;
+    center[0] += 0.7;
+}

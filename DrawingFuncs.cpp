@@ -126,7 +126,7 @@ void Leg(GLfloat Hip, GLfloat Hip_Lat, GLfloat Knee, GLfloat tx, GLfloat ty,
     glPushMatrix();
 
     //Hip Joint
-    Sphere(0.5, tx, ty, tz);
+    Sphere(0.41, tx, ty - 0.1, tz);
 
     //Thigh
     Rot(orintation * Hip_Lat, -tx, -ty, -tz, tx, ty, tz, 0, 0, 1);
@@ -142,7 +142,7 @@ void Leg(GLfloat Hip, GLfloat Hip_Lat, GLfloat Knee, GLfloat tx, GLfloat ty,
     Cube(0.4, 3, 0.4);
 
     //Foot
-    Rot(0, 0, -1.45, 0.35, 0, 0, 0, 0, 0, 0);
+    Rot(0, 0, -1.45, -0.35, 0, 0, 0, 0, 0, 0);
     Cube(0.5, 0.21, 1);
 
     glPopMatrix();
@@ -160,3 +160,52 @@ void CreateFullBody()
     Leg(R_Hip, R_Hip_Lat, R_Knee, -0.5, -1.7, 0, -1);
     Leg(L_Hip, L_Hip_Lat, L_Knee, 0.5, -1.7, 0, 1);
 }
+
+void DrawWall(GLfloat x, GLfloat y, GLfloat z, GLuint tex)
+{
+    glEnable(GL_TEXTURE_2D);
+
+    glBindTexture(GL_TEXTURE_2D, tex);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glBegin(GL_QUADS);
+
+    GLfloat Sam = 3.0f;
+
+    glNormal3f(0.0, 1.0, 0.0);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-x, y, z);
+
+    glTexCoord2f(Sam, 0.0f);
+    glVertex3f(x, y, z);
+
+    glTexCoord2f(Sam, Sam);
+    glVertex3f(x, y, -z);
+
+    glTexCoord2f(0.0f, Sam);
+    glVertex3f(-x, y, -z);
+
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+}
+
+/*
+    glNormal3f(0.0, -1.0, 0.0);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-21, -8.1, 21);
+
+	glTexCoord2f(5.0f, 0.0f);
+	glVertex3f(21, -8.1, 21);
+
+	glTexCoord2f(5.0f, 20.0f);
+	glVertex3f(21, -8.1, -21);
+
+	glTexCoord2f(0.0f, 20.0f);
+	glVertex3f(-21, -8.1, -21);
+*/
