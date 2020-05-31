@@ -40,7 +40,40 @@ void timerFalcon(int value)
 
 	
 }
+void timerJump(int value)
+{
+		glutPostRedisplay();
+		if (bY<=4)
+		{	  R_Shoulder = (R_Shoulder + 50) % 360;
+		    L_Shoulder = (L_Shoulder + 50) % 360;
+			R_Hip_Lat = (R_Hip_Lat + 5) % 360;
+			            L_Hip_Lat = (L_Hip_Lat + 5) % 360;
 
+			bY =bY+1 ;
+		}
+
+	glutTimerFunc(100, timerJump, 0);
+
+	
+}
+
+void timerJumpDown(int value)
+{
+		glutPostRedisplay();
+		if (bY<=4 && bY>0 )
+		{
+			// 	  R_Shoulder = (R_Shoulder - 50) % 360;
+		    // L_Shoulder = (L_Shoulder - 50) % 360;
+			// R_Hip_Lat = (R_Hip_Lat - 5) % 360;
+			// L_Hip_Lat = (L_Hip_Lat - 5) % 360;
+
+			bY =bY-1 ;
+		}
+
+	glutTimerFunc(50, timerJumpDown, 0);
+
+	
+}
 int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
@@ -168,7 +201,7 @@ void display(void)
 	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
 	glPushMatrix();
 
-	// glTranslatef(tx, 0, tz);
+	glTranslatef(0, bY, 0);
 	CreateFullBody();
 
 	glPopMatrix();
@@ -177,6 +210,7 @@ void display(void)
 	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
 	glPushMatrix();
 	glTranslatef(0.2f, -7.1f, Z_ball);
+	glTranslatef(0, -0.35*Z_ball,0 );
 	drawBall();
 	glPopMatrix();
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
@@ -194,7 +228,7 @@ void display(void)
 	glTranslatef(0.0f, 5.1f, 0.0f);
 
 	glRotatef(eagle_angle, 0.0, 1.0, 0.0);
-	glTranslatef(3.0f, 0.0f, 0.0f);
+	glTranslatef(7.0f, 4.0f, 0.0f);
 
 
 	glRotatef(180, 0, 1, 0);
