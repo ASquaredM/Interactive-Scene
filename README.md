@@ -16,23 +16,6 @@ Or alternatively, the provided `Exec` file can be run like so.
 ./Exec
 ```
 
-## Code Functions:
-
-### Functions used for drwaing (contained in `DrawingFuncs.h`)
-
-`Cube()` is used to create a cube and initialize its dimensions.  
-`Sphere()` is used to create a sphere and initialize its dimensions.  
-`Cylinder()`will be used later to give better shapes to the limbs.  
-`Rot()` is used to move and rotate objects.  
-`Arm()` is used to creat an arm with the given parameters (Angles,Cooridinates).  
-`Arm()` is used to creat an arm with the given parameters (Angles,Cooridinates).  
-
-### Functions used for camera movement
-
-`Right()` - `Left()` is used for camera rotation arround the vertical window screen axis.  
-`Up()` - `Down()` is used camera rotation arround the horizontal window screen axis.  
-`moveForward()` - `moveBack()` is used for Forward/Backward Navigation
-
 ## Controls
 
 ### Camera Controls
@@ -75,24 +58,38 @@ __The mouse can also be used to rotate the body.__
 
 ### The final scene
 
-![Alt Text](res/imgs/ScreenShot_1.png)
+![Alt Text](https://github.com/ASquaredM/Media/blob/master/Temp/imgs/ScreenShot_1.png?raw=true)
 
 ### Sub-Menu for floor texture
 
 (Accessed by pressing the mouse right-click)
 
-![Alt Text](res/imgs/ScreenShot_2.png)
+![Alt Text](https://github.com/ASquaredM/Media/blob/master/Temp/imgs/ScreenShot_2.png?raw=true)
 
 ### There are three different objects in the scene
 
 A fire hydrant
 
-![Alt Text](res/imgs/ScreenShot_3.png)
+![Alt Text](https://github.com/ASquaredM/Media/blob/master/Temp/imgs/ScreenShot_3.png?raw=true)
 
 A soccer ball
 
-![Alt Text](res/imgs/ScreenShot_4.png)
+![Alt Text](https://github.com/ASquaredM/Media/blob/master/Temp/imgs/ScreenShot_4.png?raw=true)
 
-An Eagle (Actually a falcon, but we didn't have time to get an actual eagle and we wanted an eagle to fly over the robot after the shot)
+An Eagle (Actually a falcon, but we didn't have time to get an actual eagle and we wanted an eagle to fly over the robot throughout the scene)
 
-![Alt Text](res/imgs/ScreenShot_5.png)
+![Alt Text](https://github.com/ASquaredM/Media/blob/master/Temp/imgs/ScreenShot_5.png?raw=true)
+
+### There are three animations in the scene
+
+The flying eagle (Always ON)
+
+![Alt Text](https://github.com/ASquaredM/Media/blob/master/Temp/imgs/GIF_1.gif?raw=true)
+
+A Goal Kick (Press `k`)
+
+![Alt Text](https://github.com/ASquaredM/Media/blob/master/Temp/imgs/GIF_2.gif?raw=true)
+
+A Celebratory Jumb (Press `y`)
+
+![Alt Text](https://github.com/ASquaredM/Media/blob/master/Temp/imgs/GIF_3.gif?raw=true)
