@@ -21,11 +21,12 @@ int main(int argc, char **argv)
 	glutMotionFunc(motion);
 
 	glutCreateMenu(screen_menu);
-	glutAddMenuEntry("         Floor1", 1);
-	glutAddMenuEntry("         Floor2", 2);
-	glutAddMenuEntry("         Floor3", 3);
-	glutAddMenuEntry("         Floor4", 4);
-	glutAddMenuEntry("         Floor5", 5);
+	glutAddMenuEntry("Choose Floor Texture", 6);
+	glutAddMenuEntry("             Floor1", 1);
+	glutAddMenuEntry("             Floor2", 2);
+	glutAddMenuEntry("             Floor3", 3);
+	glutAddMenuEntry("             Floor4", 4);
+	glutAddMenuEntry("             Floor5", 5);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 	glutMainLoop();
@@ -49,7 +50,7 @@ void initRendering()
 {
 	if (!floorTex)
 	{
-		floorTex = loadBMP("floor2.bmp");
+		floorTex = loadBMP("res/Floor Textures/floor2.bmp");
 		if (!floorTex)
 			exit(0);
 	}
@@ -242,19 +243,26 @@ void screen_menu(int value)
 	switch (value)
 	{
 	case 1:
-		floorTex = loadBMP("floor.bmp");
+		floorTex = loadBMP("res/Floor Textures/floor.bmp");
 		break;
 	case 2:
-		floorTex = loadBMP("floor2.bmp");
+		floorTex = loadBMP("res/Floor Textures/floor2.bmp");
 		break;
 	case 3:
-		floorTex = loadBMP("floor3.bmp");
+		floorTex = loadBMP("res/Floor Textures/floor3.bmp");
 		break;
 	case 4:
-		floorTex = loadBMP("floor4.bmp");
+		floorTex = loadBMP("res/Floor Textures/floor4.bmp");
 		break;
 	case 5:
-		floorTex = loadBMP("floor5.bmp");
+		floorTex = loadBMP("res/Floor Textures/floor5.bmp");
+		break;
+	case 6:
+		floorTex = loadBMP("res/Floor Textures/floor2.bmp");
+		break;
+	case 7:
+		break;
+	case 8:
 		break;
 	}
 	if (!floorTex)
