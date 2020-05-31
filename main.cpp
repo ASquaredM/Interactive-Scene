@@ -8,6 +8,45 @@
 #include "MainIO.h"
 #include "MainDecs.h"
 
+
+
+void timerBall(int value) 
+{
+
+	if (value == 0)
+    {
+        Z_ball = (Z_ball - 1.0);
+        glutPostRedisplay();
+        glutTimerFunc(100, timerBall, 0);
+
+    }
+}
+
+void timerLeg(int value) 
+{	
+
+	    if (L_Hip <= 30)
+        {
+            L_Hip = (L_Hip + 5) % 360;
+            glutPostRedisplay();
+        }
+		glutTimerFunc(50, timerLeg, 0);
+
+
+}
+void timerHip(int value) 
+{
+
+ if (L_Hip >= -45)
+        {
+            L_Hip = (L_Hip - 5) % 360;
+            glutPostRedisplay();
+        }
+        glutTimerFunc(50, timerHip, 0);
+
+}
+
+
 int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
@@ -21,12 +60,11 @@ int main(int argc, char **argv)
 	glutMotionFunc(motion);
 
 	glutCreateMenu(screen_menu);
-	glutAddMenuEntry("Choose Floor Texture", 6);
-	glutAddMenuEntry("             Floor1", 1);
-	glutAddMenuEntry("             Floor2", 2);
-	glutAddMenuEntry("             Floor3", 3);
-	glutAddMenuEntry("             Floor4", 4);
-	glutAddMenuEntry("             Floor5", 5);
+	glutAddMenuEntry("         Floor1", 1);
+	glutAddMenuEntry("         Floor2", 2);
+	glutAddMenuEntry("         Floor3", 3);
+	glutAddMenuEntry("         Floor4", 4);
+	glutAddMenuEntry("         Floor5", 5);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 	glutMainLoop();
@@ -50,7 +88,7 @@ void initRendering()
 {
 	if (!floorTex)
 	{
-		floorTex = loadBMP("res/Floor Textures/floor2.bmp");
+		floorTex = loadBMP("floor2.bmp");
 		if (!floorTex)
 			exit(0);
 	}
@@ -140,7 +178,7 @@ void display(void)
 
 	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
 	glPushMatrix();
-	glTranslatef(5.0f, -7.1f, 0.0f);
+	glTranslatef(0.2f, -7.1f, Z_ball);
 	drawBall();
 	glPopMatrix();
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
@@ -243,26 +281,19 @@ void screen_menu(int value)
 	switch (value)
 	{
 	case 1:
-		floorTex = loadBMP("res/Floor Textures/floor.bmp");
+		floorTex = loadBMP("floor.bmp");
 		break;
 	case 2:
-		floorTex = loadBMP("res/Floor Textures/floor2.bmp");
+		floorTex = loadBMP("floor2.bmp");
 		break;
 	case 3:
-		floorTex = loadBMP("res/Floor Textures/floor3.bmp");
+		floorTex = loadBMP("floor3.bmp");
 		break;
 	case 4:
-		floorTex = loadBMP("res/Floor Textures/floor4.bmp");
+		floorTex = loadBMP("floor4.bmp");
 		break;
 	case 5:
-		floorTex = loadBMP("res/Floor Textures/floor5.bmp");
-		break;
-	case 6:
-		floorTex = loadBMP("res/Floor Textures/floor2.bmp");
-		break;
-	case 7:
-		break;
-	case 8:
+		floorTex = loadBMP("floor5.bmp");
 		break;
 	}
 	if (!floorTex)

@@ -271,7 +271,16 @@ void keyboard(unsigned char key, int x, int y)
             glutPostRedisplay();
         }
         break;
+    case 'k':
+        // glutTimerFunc(1000/60,timerHip,0 ) ;
+        glutTimerFunc(1000/60,timerLeg,0 ) ;
+         glutPostRedisplay();
 
+        glutTimerFunc(1000/60,timerBall,0 ) ;
+        glutPostRedisplay();
+       
+
+        break ;
     case 27:
         exit(0);
         break;

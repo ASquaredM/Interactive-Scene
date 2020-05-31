@@ -55,7 +55,8 @@ GLfloat lightColor1[] = {0.8314f, 0.9216f, 1.0f, 1.0f};
 
 int R_Shoulder = -85, L_Shoulder = -85, R_Shoulder_Lat = 0, L_Shoulder__Lat = 0, R_Elbow = 0, L_Elbow = 0, FingerBase = 10, FingerTip = -20, R_Hip = 0,
     L_Hip = 0, R_Hip_Lat = 0, L_Hip_Lat = 0,
-    R_Knee = 0, L_Knee = 0;
+    R_Knee = 0, L_Knee = 0 ;
+float Z_ball=-2.5;
 
 int moving = 0, startx = 0, starty = 0;
 
