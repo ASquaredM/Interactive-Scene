@@ -20,6 +20,14 @@ int main(int argc, char **argv)
 	glutMouseFunc(mouse);
 	glutMotionFunc(motion);
 
+	glutCreateMenu(screen_menu);
+	glutAddMenuEntry("         Floor1", 1);
+	glutAddMenuEntry("         Floor2", 2);
+	glutAddMenuEntry("         Floor3", 3);
+	glutAddMenuEntry("         Floor4", 4);
+	glutAddMenuEntry("         Floor5", 5);
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
+
 	glutMainLoop();
 	return 0;
 }
@@ -39,9 +47,14 @@ void init(void)
 //Initializes 3D rendering
 void initRendering()
 {
-	Image *image = loadBMP("floor2.bmp");
-	_textureId = loadTexture(image, _textureId);
-	delete image;
+	if (!floorTex)
+	{
+		floorTex = loadBMP("floor.bmp");
+		if (!floorTex)
+			exit(0);
+	}
+	_textureId = loadTexture(floorTex, _textureId);
+	delete floorTex;
 
 	// Setting light source properties and enabling it
 	// Turn on the power
@@ -73,35 +86,6 @@ void initRendering()
 	glShadeModel(GL_SMOOTH);
 	// Enable Depth buffer
 	glEnable(GL_DEPTH_TEST);
-
-	// startList = glGenLists(4);
-	// glNewList(startList, GL_COMPILE);
-	// glRotatef(90, 0, 1, 0);
-	// 	glScalef(1, 1.2, 1);
-	// 	glTranslatef(1.7, -0.05, -.3);
-	// pmodel1 = pmodel4;
-	// drawmodel();
-	// glEndList();
-
-	// glNewList(startList + 1, GL_COMPILE);
-	// 	glRotatef(270, 0, 1, 0);
-	// 	glScalef(1, 1.2, 1);
-	// 	glTranslatef(-1.7, -0.05, -.3);
-	// pmodel1 = pmodel4;
-	// drawmodel();
-	// glEndList();
-
-	// glNewList(startList + 2, GL_COMPILE);
-	// glTranslatef(0.3, -.1, 0.075);
-	// pmodel1 = pmodel2;
-	// drawmodel();
-	// glEndList();
-
-	// glNewList(startList + 3, GL_COMPILE);
-	// glTranslatef(-0.6, 0, 0.0);
-	// pmodel1 = pmodel2;
-	// drawmodel();
-	// glEndList();
 }
 
 void display(void)
@@ -252,4 +236,30 @@ void drawmodel2(void)
 		glmScale(pmodel2, 1);
 	}
 	glmDraw(pmodel2, GLM_SMOOTH | GLM_MATERIAL);
+}
+
+void screen_menu(int value)
+{
+	switch (value)
+	{
+	case 1:
+		floorTex = loadBMP("floor.bmp");
+		break;
+	case 2:
+		floorTex = loadBMP("floor2.bmp");
+		break;
+	case 3:
+		floorTex = loadBMP("floor3.bmp");
+		break;
+	case 4:
+		floorTex = loadBMP("floor4.bmp");
+		break;
+	case 5:
+		floorTex = loadBMP("floor5.bmp");
+		break;
+	}
+	if (!floorTex)
+		exit(0);
+	initRendering();
+	glutPostRedisplay();
 }

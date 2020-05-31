@@ -12,6 +12,8 @@ float DRot = 90;
 float Zmax, Zmin;
 float VRot = 0.0;
 
+Image *floorTex;
+
 GLMmodel *pmodel;
 GLMmodel *pmodel1;
 GLMmodel *pmodel2;
@@ -85,5 +87,7 @@ void drawmodel1(void);
 void drawmodel2(void);
 
 void initRendering();
+
+void screen_menu(int value);
 
 #endif
