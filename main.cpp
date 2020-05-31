@@ -29,15 +29,16 @@ void timerLeg(int value)
 	}
 	glutTimerFunc(50, timerLeg, 0);
 }
-void timerHip(int value)
+void timerFalcon(int value)
 {
-
-	if (L_Hip >= -45)
-	{
-		L_Hip = (L_Hip - 5) % 360;
 		glutPostRedisplay();
-	}
-	glutTimerFunc(50, timerHip, 0);
+
+    eagle_angle = (eagle_angle +1)%360;
+	glutPostRedisplay();
+
+	glutTimerFunc(2, timerFalcon, 0);
+
+	
 }
 
 int main(int argc, char **argv)
@@ -51,8 +52,11 @@ int main(int argc, char **argv)
 	glutSpecialFunc(specialKeys);
 	glutMouseFunc(mouse);
 	glutMotionFunc(motion);
+	glutTimerFunc(0, timerFalcon, 0);
+
 
 	glutCreateMenu(screen_menu);
+
 	glutAddMenuEntry("Choose Floor Texture", 6);
 	glutAddMenuEntry("             Floor1", 1);
 	glutAddMenuEntry("             Floor2", 2);
@@ -188,6 +192,11 @@ void display(void)
 	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
 	glPushMatrix();
 	glTranslatef(0.0f, 5.1f, 0.0f);
+
+	glRotatef(eagle_angle, 0.0, 1.0, 0.0);
+	glTranslatef(3.0f, 0.0f, 0.0f);
+
+
 	glRotatef(180, 0, 1, 0);
 	glScalef(3.0f, 3.0f, 3.0f);
 	drawEagle();
