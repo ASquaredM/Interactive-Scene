@@ -83,8 +83,8 @@ void reshape(int w, int h);
 GLuint loadTexture(Image *image, GLuint tex);
 
 void drawmodel(void);
-void drawmodel1(void);
-void drawmodel2(void);
+void drawBall(void);
+void drawFireHydrant(void);
 
 void initRendering();
 

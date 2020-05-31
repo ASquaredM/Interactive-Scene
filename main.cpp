@@ -49,7 +49,7 @@ void initRendering()
 {
 	if (!floorTex)
 	{
-		floorTex = loadBMP("floor.bmp");
+		floorTex = loadBMP("floor2.bmp");
 		if (!floorTex)
 			exit(0);
 	}
@@ -139,9 +139,8 @@ void display(void)
 
 	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
 	glPushMatrix();
-	glTranslatef(5.0f, 3.7f, 0.0f);
-	glScalef(3.0f, 3.0f, 3.0f);
-	drawmodel1();
+	glTranslatef(5.0f, -7.1f, 0.0f);
+	drawBall();
 	glPopMatrix();
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 
@@ -149,7 +148,7 @@ void display(void)
 	glPushMatrix();
 	glTranslatef(-11.0f, -5.1f, 0.0f);
 	glScalef(3.0f, 3.0f, 3.0f);
-	drawmodel2();
+	drawFireHydrant();
 	glPopMatrix();
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 
@@ -205,11 +204,11 @@ void drawmodel(void)
 	glmDraw(pmodel1, GLM_SMOOTH | GLM_MATERIAL);
 }
 
-void drawmodel1(void)
+void drawBall(void)
 {
 	if (!pmodel)
 	{
-		char Obj_path[] = "res/asd/f-16.obj";
+		char Obj_path[] = "res/Soc Ball/soccerball.obj";
 		pmodel = glmReadOBJ(Obj_path);
 
 		if (!pmodel)
@@ -221,7 +220,7 @@ void drawmodel1(void)
 	}
 	glmDraw(pmodel, GLM_SMOOTH | GLM_MATERIAL);
 }
-void drawmodel2(void)
+void drawFireHydrant(void)
 {
 	if (!pmodel2)
 	{
