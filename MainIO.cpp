@@ -48,7 +48,7 @@ void keyboard(unsigned char key, int x, int y)
         glutPostRedisplay();
         break;
 
-    case 'a':
+    case 's':
         if (R_Shoulder <= 85)
         {
             R_Shoulder = (R_Shoulder + 5) % 360;
@@ -56,7 +56,7 @@ void keyboard(unsigned char key, int x, int y)
         }
         break;
 
-    case 'A':
+    case 'S':
         if (R_Shoulder >= -85)
         {
             R_Shoulder = (R_Shoulder - 5) % 360;
@@ -64,7 +64,7 @@ void keyboard(unsigned char key, int x, int y)
         }
         break;
 
-    case 's':
+    case 'a':
         if (L_Shoulder <= 85)
         {
             L_Shoulder = (L_Shoulder + 5) % 360;
@@ -72,7 +72,7 @@ void keyboard(unsigned char key, int x, int y)
         }
         break;
 
-    case 'S':
+    case 'A':
         if (L_Shoulder >= -85)
         {
             L_Shoulder = (L_Shoulder - 5) % 360;
@@ -80,39 +80,39 @@ void keyboard(unsigned char key, int x, int y)
         }
         break;
 
-    case 't':
-        if (R_Shoulder_Lat <= 35)
+    case 'w':
+        if (R_Shoulder_Lat <= 85)
         {
             R_Shoulder_Lat = (R_Shoulder_Lat + 5) % 360;
             glutPostRedisplay();
         }
         break;
 
-    case 'T':
-        if (R_Shoulder_Lat >= -85)
+    case 'W':
+        if (R_Shoulder_Lat >= -35)
         {
             R_Shoulder_Lat = (R_Shoulder_Lat - 5) % 360;
             glutPostRedisplay();
         }
         break;
 
-    case 'y':
-        if (L_Shoulder__Lat <= 35)
+    case 'q':
+        if (L_Shoulder__Lat <= 85)
         {
             L_Shoulder__Lat = (L_Shoulder__Lat + 5) % 360;
             glutPostRedisplay();
         }
         break;
 
-    case 'Y':
-        if (L_Shoulder__Lat >= -85)
+    case 'Q':
+        if (L_Shoulder__Lat >= -35)
         {
             L_Shoulder__Lat = (L_Shoulder__Lat - 5) % 360;
             glutPostRedisplay();
         }
         break;
 
-    case 'w':
+    case 'r':
         if (R_Elbow <= 135)
         {
             R_Elbow = (R_Elbow + 5) % 360;
@@ -120,7 +120,7 @@ void keyboard(unsigned char key, int x, int y)
         }
         break;
 
-    case 'W':
+    case 'R':
         if (R_Elbow >= 0)
         {
             R_Elbow = (R_Elbow - 5) % 360;
@@ -176,7 +176,7 @@ void keyboard(unsigned char key, int x, int y)
         }
         break;
 
-    case 'z':
+    case 'x':
         if (R_Hip <= 85)
         {
             R_Hip = (R_Hip + 5) % 360;
@@ -184,7 +184,7 @@ void keyboard(unsigned char key, int x, int y)
         }
         break;
 
-    case 'Z':
+    case 'X':
         if (R_Hip >= -85)
         {
             R_Hip = (R_Hip - 5) % 360;
@@ -192,7 +192,7 @@ void keyboard(unsigned char key, int x, int y)
         }
         break;
 
-    case 'x':
+    case 'z':
         if (L_Hip <= 85)
         {
             L_Hip = (L_Hip + 5) % 360;
@@ -200,7 +200,7 @@ void keyboard(unsigned char key, int x, int y)
         }
         break;
 
-    case 'X':
+    case 'Z':
         if (L_Hip >= -85)
         {
             L_Hip = (L_Hip - 5) % 360;
@@ -208,7 +208,7 @@ void keyboard(unsigned char key, int x, int y)
         }
         break;
 
-    case 'c':
+    case 'v':
         if (R_Hip_Lat <= 75)
         {
             R_Hip_Lat = (R_Hip_Lat + 5) % 360;
@@ -216,7 +216,7 @@ void keyboard(unsigned char key, int x, int y)
         }
         break;
 
-    case 'C':
+    case 'V':
         if (R_Hip_Lat >= 5)
         {
             R_Hip_Lat = (R_Hip_Lat - 5) % 360;
@@ -224,7 +224,7 @@ void keyboard(unsigned char key, int x, int y)
         }
         break;
 
-    case 'v':
+    case 'c':
         if (L_Hip_Lat <= 75)
         {
             L_Hip_Lat = (L_Hip_Lat + 5) % 360;
@@ -232,7 +232,7 @@ void keyboard(unsigned char key, int x, int y)
         }
         break;
 
-    case 'V':
+    case 'C':
         if (L_Hip_Lat >= 5)
         {
             L_Hip_Lat = (L_Hip_Lat - 5) % 360;
@@ -240,34 +240,34 @@ void keyboard(unsigned char key, int x, int y)
         }
         break;
 
-    case 'b':
-        if (R_Knee <= 135)
-        {
-            R_Knee = (R_Knee + 5) % 360;
-            glutPostRedisplay();
-        }
-        break;
-
-    case 'B':
-        if (R_Knee >= 0)
+    case 'n':
+        if (R_Knee >= -135)
         {
             R_Knee = (R_Knee - 5) % 360;
             glutPostRedisplay();
         }
         break;
 
-    case 'n':
-        if (L_Knee <= 135)
+    case 'N':
+        if (R_Knee <= 0)
         {
-            L_Knee = (L_Knee + 5) % 360;
+            R_Knee = (R_Knee + 5) % 360;
             glutPostRedisplay();
         }
         break;
 
-    case 'N':
-        if (L_Knee >= 0)
+    case 'b':
+        if (L_Knee >= -135)
         {
             L_Knee = (L_Knee - 5) % 360;
+            glutPostRedisplay();
+        }
+        break;
+
+    case 'B':
+        if (L_Knee <= 0)
+        {
+            L_Knee = (L_Knee + 5) % 360;
             glutPostRedisplay();
         }
         break;

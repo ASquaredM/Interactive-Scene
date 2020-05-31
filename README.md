@@ -4,9 +4,7 @@ A CG project were I am building a full interactive scene with OpenGL.
 
 ## To Run the code
 
-The code uses a header file that contains the functions used for drawing.  
-
-So, the following command can be used to run the code
+The following command can be used to run the code
 
 ``` terminal
 g++ -o Exec main.cpp imageloader.cpp glm.cpp DrawingFuncs.cpp MathHelpers.cpp MainIO.cpp CameraFns.cpp -lGL -lGLU -lglut -lm
@@ -45,15 +43,28 @@ __The mouse can also be used to rotate the body.__
 
 ### Body Control
 
-`a` - `A`: Right Shoulder (Lateral)  
-`s` - `S`: Left Shoulder (Lateral)  
-`t` - `T`: Right Shoulder  
-`y` - `Y`: Left Shoulder  
+#### Shoulder
+
+`s` - `S`: Right Shoulder (Lateral)  
+`a` - `A`: Left Shoulder (Lateral)  
+`w` - `W`: Right Shoulder  
+`q` - `Q`: Left Shoulder  
+
+#### Elbow
+
+`r` - `R`: Right Elbow  
+`e` - `E`: Left Elbow  
+
+#### Hand
+
 `f` - `F`: Grip  
 `g` - `G`: Finger Tips  
-`z` - `Z`: Right Hip  
-`x` - `X`: Left Hip  
+
+#### Leg
+
+`x` - `X`: Right Hip  
+`z` - `z`: Left Hip  
 `c` - `C`: Right Hip (Lateral)  
 `v` - `V`: Left Hip (Lateral)  
-`b` - `B`: Right Knee  
-`n` - `N`: Left Knee  
+`n` - `N`: Right Knee  
+`b` - `B`: Left Knee

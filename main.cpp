@@ -8,44 +8,37 @@
 #include "MainIO.h"
 #include "MainDecs.h"
 
-
-
-void timerBall(int value) 
+void timerBall(int value)
 {
 
 	if (value == 0)
-    {
-        Z_ball = (Z_ball - 1.0);
-        glutPostRedisplay();
-        glutTimerFunc(100, timerBall, 0);
-
-    }
+	{
+		Z_ball = (Z_ball - 1.0);
+		glutPostRedisplay();
+		glutTimerFunc(100, timerBall, 0);
+	}
 }
 
-void timerLeg(int value) 
-{	
-
-	    if (L_Hip <= 30)
-        {
-            L_Hip = (L_Hip + 5) % 360;
-            glutPostRedisplay();
-        }
-		glutTimerFunc(50, timerLeg, 0);
-
-
-}
-void timerHip(int value) 
+void timerLeg(int value)
 {
 
- if (L_Hip >= -45)
-        {
-            L_Hip = (L_Hip - 5) % 360;
-            glutPostRedisplay();
-        }
-        glutTimerFunc(50, timerHip, 0);
-
+	if (L_Hip <= 30)
+	{
+		L_Hip = (L_Hip + 5) % 360;
+		glutPostRedisplay();
+	}
+	glutTimerFunc(50, timerLeg, 0);
 }
+void timerHip(int value)
+{
 
+	if (L_Hip >= -45)
+	{
+		L_Hip = (L_Hip - 5) % 360;
+		glutPostRedisplay();
+	}
+	glutTimerFunc(50, timerHip, 0);
+}
 
 int main(int argc, char **argv)
 {
@@ -88,7 +81,7 @@ void initRendering()
 {
 	if (!floorTex)
 	{
-		floorTex = loadBMP("floor2.bmp");
+		floorTex = loadBMP("res/Floor Textures/floor2.bmp");
 		if (!floorTex)
 			exit(0);
 	}
@@ -191,6 +184,15 @@ void display(void)
 	glPopMatrix();
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
 
+	//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
+	glPushMatrix();
+	glTranslatef(0.0f, 5.1f, 0.0f);
+	glRotatef(180, 0, 1, 0);
+	glScalef(3.0f, 3.0f, 3.0f);
+	drawEagle();
+	glPopMatrix();
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+
 	// To Represent Light Sources and measure distances (I am too lazy to figure those on my own)
 	Sphere(0.1, 0.0, 7.1, 0);
 	Sphere(0.1, 0.0, 1.1, -21);
@@ -276,24 +278,41 @@ void drawFireHydrant(void)
 	glmDraw(pmodel2, GLM_SMOOTH | GLM_MATERIAL);
 }
 
+void drawEagle(void)
+{
+	if (!pmodel3)
+	{
+		char Obj_path[] = "res/Flacon/FALCON_2.obj";
+		pmodel3 = glmReadOBJ(Obj_path);
+
+		if (!pmodel3)
+			exit(0);
+		glmUnitize(pmodel3);
+		glmFacetNormals(pmodel3);
+		glmVertexNormals(pmodel3, 90.0);
+		glmScale(pmodel3, 1);
+	}
+	glmDraw(pmodel3, GLM_SMOOTH | GLM_MATERIAL);
+}
+
 void screen_menu(int value)
 {
 	switch (value)
 	{
 	case 1:
-		floorTex = loadBMP("floor.bmp");
+		floorTex = loadBMP("res/Floor Textures/floor.bmp");
 		break;
 	case 2:
-		floorTex = loadBMP("floor2.bmp");
+		floorTex = loadBMP("res/Floor Textures/floor2.bmp");
 		break;
 	case 3:
-		floorTex = loadBMP("floor3.bmp");
+		floorTex = loadBMP("res/Floor Textures/floor3.bmp");
 		break;
 	case 4:
-		floorTex = loadBMP("floor4.bmp");
+		floorTex = loadBMP("res/Floor Textures/floor4.bmp");
 		break;
 	case 5:
-		floorTex = loadBMP("floor5.bmp");
+		floorTex = loadBMP("res/Floor Textures/floor5.bmp");
 		break;
 	}
 	if (!floorTex)
