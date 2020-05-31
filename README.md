@@ -79,7 +79,7 @@ __The mouse can also be used to rotate the body.__
 
 ### Sub-Menu for floor texture
 
-(Accesd by pressing mouse right-click)
+(Accessed by pressing the mouse right-click)
 
 ![Alt Text](res/imgs/ScreenShot_2.png)
 
@@ -89,10 +89,10 @@ A fire hydrant
 
 ![Alt Text](res/imgs/ScreenShot_3.png)
 
-A soceer ball
+A soccer ball
 
 ![Alt Text](res/imgs/ScreenShot_4.png)
 
-An Eagle (Actually a falcon but we didn't have time to get an actual eagle and we wanted an eagle to fly over the robot after the shot)
+An Eagle (Actually a falcon, but we didn't have time to get an actual eagle and we wanted an eagle to fly over the robot after the shot)
 
 ![Alt Text](res/imgs/ScreenShot_5.png)
