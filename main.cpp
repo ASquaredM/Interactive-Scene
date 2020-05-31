@@ -53,11 +53,12 @@ int main(int argc, char **argv)
 	glutMotionFunc(motion);
 
 	glutCreateMenu(screen_menu);
-	glutAddMenuEntry("         Floor1", 1);
-	glutAddMenuEntry("         Floor2", 2);
-	glutAddMenuEntry("         Floor3", 3);
-	glutAddMenuEntry("         Floor4", 4);
-	glutAddMenuEntry("         Floor5", 5);
+	glutAddMenuEntry("Choose Floor Texture", 6);
+	glutAddMenuEntry("             Floor1", 1);
+	glutAddMenuEntry("             Floor2", 2);
+	glutAddMenuEntry("             Floor3", 3);
+	glutAddMenuEntry("             Floor4", 4);
+	glutAddMenuEntry("             Floor5", 5);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 	glutMainLoop();
@@ -313,6 +314,13 @@ void screen_menu(int value)
 		break;
 	case 5:
 		floorTex = loadBMP("res/Floor Textures/floor5.bmp");
+		break;
+	case 6:
+		floorTex = loadBMP("res/Floor Textures/floor2.bmp");
+		break;
+	case 7:
+		break;
+	case 8:
 		break;
 	}
 	if (!floorTex)

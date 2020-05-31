@@ -37,8 +37,10 @@ Or alternatively, the provided `Exec` file can be run like so.
 
 ### Camera Controls
 
-Arrows: Control the camera in their respective direction.  
-`'k'` - `','`: Navigate the body Forward/Backward respectively.  
+Arrows(`<-^->`): Control the camera in their respective direction.  
+
+--------`'p'`--------  
+`'l'` - `';'` - `'''`: Navigate the scene Upward/Downward or Rotate Right/Left.  
 __The mouse can also be used to rotate the body.__  
 
 ### Body Control
@@ -64,7 +66,33 @@ __The mouse can also be used to rotate the body.__
 
 `x` - `X`: Right Hip  
 `z` - `z`: Left Hip  
-`c` - `C`: Right Hip (Lateral)  
-`v` - `V`: Left Hip (Lateral)  
+`v` - `V`: Right Hip (Lateral)  
+`c` - `C`: Left Hip (Lateral)  
 `n` - `N`: Right Knee  
-`b` - `B`: Left Knee
+`b` - `B`: Left Knee  
+
+## Results
+
+### The final scene
+
+![Alt Text](res/imgs/ScreenShot_1.png)
+
+### Sub-Menu for floor texture
+
+(Accesd by pressing mouse right-click)
+
+![Alt Text](res/imgs/ScreenShot_2.png)
+
+### There are three different objects in the scene
+
+A fire hydrant
+
+![Alt Text](res/imgs/ScreenShot_3.png)
+
+A soceer ball
+
+![Alt Text](res/imgs/ScreenShot_4.png)
+
+An Eagle (Actually a falcon but we didn't have time to get an actual eagle and we wanted an eagle to fly over the robot after the shot)
+
+![Alt Text](res/imgs/ScreenShot_5.png)
